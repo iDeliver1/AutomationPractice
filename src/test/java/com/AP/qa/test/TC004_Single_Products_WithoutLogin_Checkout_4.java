@@ -22,7 +22,13 @@ public class TC004_Single_Products_WithoutLogin_Checkout_4 extends TestBase{
 	public void Setup(String Browser) throws Throwable {
 		initialization(Browser);
 		SetUP(this.getClass().getSimpleName(), driver.getTitle());
-		 new homepage();
+		//Validation for Given URL is opened or not
+		
+		 if(HomePageVvalidation(driver.getTitle())!=null) {
+			 Reporting("Pass", "URL Navigation", "Successfully navigated to Automation Practice", "User Should be able to navigate Automation Practice");
+		 }else {
+			 Reporting("Fail", "URL Navigation", "Unsuccessfully navigated to Automation Practice", "User Should be able to navigate Automation Practice");
+		 }
 		
 	}
 	
@@ -66,16 +72,24 @@ public class TC004_Single_Products_WithoutLogin_Checkout_4 extends TestBase{
 			homepage.proceed.click();
 				new Login();
 				try {
+					
 					//Checking For User is logged in or not 
 				if(driver.getTitle().contains("Login - My Store")) {
-				GlobalElement = Login.Login_After_checkout(prop.getProperty("username"), prop.getProperty("password"));
-						if(Genral_Function.LoginValidation(GlobalElement)) {
-								 new Payment();	
-						}
+					
+					Login.user.sendKeys(prop.getProperty("username"));
+					Login.password.sendKeys(prop.getProperty("password"));
+					Login.signIn.click();
+				
+					if(Login.Afterloginvalidation()!=null) {
+						 Reporting("Pass", "Payment Page Validation", "User successfull naviagted to Payment Page after logging with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to Payment Page after logging with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));	 
+					}
+					else {
+						 Reporting("Fail", "Payment Page Validation", "User unsuccessfull naviagted to Payment Page after logging with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to Payment Page after logging with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));
+						 closeBrowser();
+					}
 				}
 				}catch(Exception e) {
-					new Payment();
-				System.out.println("Alread Logged in");	
+					e.printStackTrace();
 				}
 				
 				Payment.processAddress.click();
@@ -86,7 +100,7 @@ public class TC004_Single_Products_WithoutLogin_Checkout_4 extends TestBase{
 				Payment.confirm.click();
 				
 				if(Genral_Function.Argvalidation("Final Price Validation", GlobalValue,Payment.price.getText().replace("$", ""))==true) {
-					new Logout();
+					Payment.logoutvalidation();
 				}	
 		}
 	}
@@ -97,14 +111,12 @@ public class TC004_Single_Products_WithoutLogin_Checkout_4 extends TestBase{
 	@Test(priority = 4, enabled = true)
 	public void LogoutTest() throws Throwable {
 		Logout.signOut.click();
-		GlobalValue = Logout.signIn.getText();
-		Genral_Function.logoutvalidation(GlobalValue);
+		Genral_Function.logoutvalidation(Logout.signIn.getText());
 	}
 	
 	@AfterClass
 	public void Flush() throws Throwable
 	{
-		
 		closeBrowser();
 	}
 	

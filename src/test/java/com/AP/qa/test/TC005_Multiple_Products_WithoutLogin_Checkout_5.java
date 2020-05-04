@@ -4,6 +4,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.AP.qa.base.TestBase;
 import com.AP.qa.pages.Login;
 import com.AP.qa.pages.Logout;
@@ -13,16 +14,20 @@ import com.AP.qa.util.Excel_Libraries;
 import com.AP.qa.util.Genral_Function;
 import com.AP.qa.util.TestUtil;
 
+public class TC005_Multiple_Products_WithoutLogin_Checkout_5 extends TestBase {
 
-public class TC005_Multiple_Products_WithoutLogin_Checkout_5 extends TestBase{
-	
 	
 	@Parameters("Browser")
 	@BeforeClass
 	public void Setup(String Browser) throws Throwable {
 		initialization(Browser);
 		SetUP(this.getClass().getSimpleName(), driver.getTitle());
-		 new homepage();
+		
+		 if(HomePageVvalidation(driver.getTitle())!=null) {
+			 Reporting("Pass", "URL Navigation", "Successfully navigated to Automation Practice", "User Should be able to navigate Automation Practice");
+		 }else {
+			 Reporting("Fail", "URL Navigation", "Unsuccessfully navigated to Automation Practice", "User Should be able to navigate Automation Practice");
+		 }
 	}
 	
 	//Select Product test
@@ -45,7 +50,7 @@ public class TC005_Multiple_Products_WithoutLogin_Checkout_5 extends TestBase{
 							
 							if(homepage.MultiProducts.get(i).getText().contains(Excel_Libraries.getdata(j)))
 							{
-							//	Reporting("Pass", j+1+" Validation for Input Value", "There must be an Input value", " Input Value"+Excel_Libraries.getdata(j));
+							Reporting("Pass", j+1+" Validation for Input Value", "There must be an Input value", " Input Value"+Excel_Libraries.getdata(j));
 								TestUtil.MoveElement(homepage.MultiProducts.get(i));
 								
 								WaitForObject(homepage.Addtocart.get(i), "Click");
@@ -81,18 +86,29 @@ public class TC005_Multiple_Products_WithoutLogin_Checkout_5 extends TestBase{
 	//payment & login test
 	@Test(priority = 2, enabled = true)
 	public void PaymentTest() throws Throwable{
-		GlobalValue = Genral_Function.getMultiProductValue(Payment.Price, Payment.tax);
+		GlobalValue = Genral_Function.getMultiProductValue(homepage.Price, homepage.tax);
 		
-		if(Genral_Function.Argvalidation("CheckOut Price ", GlobalValue,Payment.TotalPrice.getText().replace("$", ""))==true) {
+		if(Genral_Function.Argvalidation("CheckOut Price ", GlobalValue,homepage.TotalPrice.getText().replace("$", ""))==true) {
 			homepage.proceed.click();
+				
 				new Login();
 				try {
 					
 					//Checking For User is logged in or not 
 				if(driver.getTitle().contains("Login - My Store")) {
-						GlobalElement = Login.Login_After_checkout(prop.getProperty("username"), prop.getProperty("password"));
-						if(Genral_Function.LoginValidation(GlobalElement)) {
-								new Payment();	
+					
+						
+						
+						Login.user.sendKeys(prop.getProperty("username"));
+						Login.password.sendKeys(prop.getProperty("password"));
+						Login.signIn.click();
+						
+						if(Login.Afterloginvalidation()!=null) {
+							 Reporting("Pass", "Login Page Validation", "User successfull naviagted to Payment Page with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to Payment Page with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));	 
+						}
+						else {
+							 Reporting("Fail", "Login Page Validation", "User unsuccessfull naviagted to Payment Page with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to Payment Page with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));
+							 closeBrowser();
 						}
 				}
 				}catch(Exception e) {
@@ -118,8 +134,7 @@ public class TC005_Multiple_Products_WithoutLogin_Checkout_5 extends TestBase{
 	@Test(priority = 4, enabled = true)
 	public void LogoutTest() throws Throwable {
 		Logout.signOut.click();
-		GlobalValue = Logout.signIn.getText();
-		Genral_Function.logoutvalidation(GlobalValue);
+		Genral_Function.logoutvalidation(Logout.signIn.getText());
 	}
 	
 	@AfterClass
@@ -128,5 +143,7 @@ public class TC005_Multiple_Products_WithoutLogin_Checkout_5 extends TestBase{
 		
 		closeBrowser();
 	}
+	
+	
 	
 }

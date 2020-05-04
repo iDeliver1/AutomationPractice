@@ -20,8 +20,9 @@ public class Genral_Function extends TestBase {
 		}catch(Exception e) {
 			Reporting("Pass", "Login Validation", "User Should be able to log in with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password") , "Un-Successfull logged in withusername - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));
 			closeBrowser();
+			return false;
 		}
-		return false;
+		
 	}
 			
 	
@@ -59,9 +60,10 @@ public class Genral_Function extends TestBase {
 			   
 		   }catch(Exception e) {
 			   e.printStackTrace();
+			   return null;
 			 
 		   }   
-		return null;		
+		   	
 }
 	
 	
@@ -82,8 +84,9 @@ public class Genral_Function extends TestBase {
 				
 				Reporting("FAIL","Verifying "+StepName,StepName+"is equal to "+Actual+""+e,StepName+"should be equal to "+Expected);
 				closeBrowser();
+				return false;
 			}
-		return false;
+		
 	
 	}
 

@@ -5,6 +5,8 @@ package com.AP.qa.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
 import com.AP.qa.base.TestBase;
 import com.AP.qa.util.TestUtil;
 
@@ -34,37 +36,35 @@ public class Login extends TestBase{
 		PageFactory.initElements(driver, this);
 	}
 	
-	public boolean validateSWNLogo(){
+	public static boolean validateAPLogo(){
 		return validate_user.isDisplayed();
 	}
 	
-	public WebElement Login_Before_checkout(String usr, String pass) throws Throwable {
-		signInbtn.click();
-		user.sendKeys(usr);
-		password.sendKeys(pass);
-		signIn.click();
-		home.click();
-		return validate_user;
-		
-	}
-	
-	
-	
-	public static WebElement Login_After_checkout(String usr, String pass) throws Throwable {
-		//signInbtn.click();
-		try{
-		user.sendKeys(usr);
-		password.sendKeys(pass);
-		signIn.click();
-		return validate_user;
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
-		return null;
 
+	
+	public static homepage Beforeloginvalidation() {
+		try {
+			Assert.assertEquals(true,validateAPLogo());
+			return new homepage();
+		}catch(Exception e) {
+			
+		}
+		
+		return null;
 	}
 	
+
+	
+	public static Payment Afterloginvalidation() {
+		try {
+			Assert.assertEquals(true, validateAPLogo());
+			return new Payment();
+		}catch(Exception e) {
+			
+		}
+		
+		return null;
+	}
 	
 		
 	}

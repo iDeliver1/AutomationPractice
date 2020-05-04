@@ -62,14 +62,11 @@ public class Payment extends TestBase{
 	public Payment() {
 		PageFactory.initElements(driver, this);
 	}
+
 	
-	public String  paymentpage() throws Throwable {	
-		processAddress.click();
-		checkbox.click();
-		processCarrier.click();
-		String FPrice = amount.getText().replace("$", "");
-		pay_method.click();
-		confirm.click();
-		return FPrice;
-		}
+	
+	public static Logout logoutvalidation() {
+		
+		return new Logout();
+	}
 }

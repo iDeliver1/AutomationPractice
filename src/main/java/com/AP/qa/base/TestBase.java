@@ -28,8 +28,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.Reporter;
 
+import com.AP.qa.pages.Login;
+import com.AP.qa.pages.homepage;
 import com.AP.qa.util.Excel_Libraries;
 import com.AP.qa.util.Extent_Report;
 import com.AP.qa.util.TestUtil;
@@ -56,6 +59,7 @@ public class TestBase {
 	public static int counter = 0;
 	public static String brow;
 	public static String BrowserVersion ;
+	public static Boolean GlobalArgumrnt;
 	public TestBase(){
 		
 		try {
@@ -188,4 +192,25 @@ public  String GetProjectName(){
 			
 		}
 
+		public static Login HomePageValidation(String Actual) {
+			try {
+				Assert.assertEquals(Actual, "My Store");
+				return new Login();
+			}catch(Exception e) {
+				
+				return null;
+			}
+		}
+		
+		
+		public static homepage HomePageVvalidation(String Actual) {
+			try {
+				Assert.assertEquals(Actual, "My Store");
+				return new homepage();
+			}catch(Exception e) {
+				
+				return null;
+			}
+		}
+		
 }

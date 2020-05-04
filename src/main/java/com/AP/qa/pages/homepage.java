@@ -90,87 +90,26 @@ public class homepage extends TestBase{
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void order_product(String Product) throws Throwable {
+	
+	
+	
+	public static Payment Price_Validation(Boolean Validationpoint) {
+		try {
 		
-		
-		switch (Product) {
-		case "Single":
-			
-			try {
-				TestUtil.MoveElement(Target);
-				Tshirt.click();
-				WaitForObject(qty, "Check");
-				qty.clear();
-				qty.sendKeys(prop.getProperty("Qty"));
-				
-				TestUtil.SelectQuantity(size, "L");//Select Size -S / M /L
-				cart.click();
-				WaitForObject(checkout, "Check");
-				checkout.click();
-				}
-				catch(Exception e) {
-					String Cause = e.toString();
-					Reporting("Fail", "Home Page Validation", "homepage should displayed ", "Homepage is unable to show due to"+Cause.substring(1, 88));
-					closeBrowser();
-				}
-			
-			break;
-			
-		case "Multi":
-			try {
-				int multiproducts  = Integer.parseInt(prop.getProperty("MultiProduct"));
-				
-				for(int j = 0;j<multiproducts;j++ ) {
-						
-					System.out.println(MultiProducts.size());
-						for(int i=0;i<=MultiProducts.size();i++)
-						{
-							try {
-							if(Excel_Libraries.getdata(j).isEmpty()==false) {
-								Reporting("Pass", j+1+" Validation for Input Value", "There must be an Input value", " Input Value"+Excel_Libraries.getdata(j));
-								if(MultiProducts.get(i).getText().contains(Excel_Libraries.getdata(j)))
-								{
-									TestUtil.MoveElement(MultiProducts.get(i));
-									WaitForObject(Addtocart.get(i), "Click");
-									counter=counter+1;
-									break;
-								}
-							}
-						}
-						catch(Exception f){
-							f.printStackTrace();
-							Reporting("Fail", j+1+" Validation for Input Value", "There must be an Input value", " Input Value"+Excel_Libraries.getdata(j));
-						}
-						}
-						
-						if(counter==multiproducts) {
-							ProccedCheckout.click();
-						}
-						else
-							WaitForObject(ContinueShop, "Click");		
-				}
-			
-				
-				}
-				catch(Exception e) {
-					String Casue = e.toString();
-					Reporting("Fail", "Home  Page  Validation", "Home Page should displayed ", "Home Page is unable to show due to"+Casue.substring(1, 88));
-					closeBrowser();
-				}
-					break;
-					
-		case "Reorder":
-			WaitForObject(profile, "Click");		
-			orderDetails.click();
-			selectFirstOrder.click();
-			
-			break;
-		
-				default:
-					
-					break;
+		if(Validationpoint==true) {
+			return new Payment();
 		}
+		}catch(Exception e) {
+			
 		}
+		return  null;
+	}
+	
+	
+	
+	
+	
+	
 }
 	
 		

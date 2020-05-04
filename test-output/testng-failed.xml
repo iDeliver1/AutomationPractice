@@ -38,42 +38,4 @@
       <class name="com.AP.qa.test.TC005_Multiple_Products_WithoutLogin_Checkout_5"/>
     </classes>
   </test> <!-- Test5 -->
-  <test name="Test5(failed)">
-    <parameter name="Product" value="Multi"/>
-    <parameter name="Browser" value="chrome"/>
-    <classes>
-      <class name="com.AP.qa.test.TC005_Multiple_Products_WithoutLogin_Checkout_5">
-        <methods>
-          <include name="Setup"/>
-          <include name="Flush"/>
-          <include name="LogoutTest"/>
-          <include name="PaymentTest"/>
-        </methods>
-      </class> <!-- com.AP.qa.test.TC005_Multiple_Products_WithoutLogin_Checkout_5 -->
-      <class name="com.AP.qa.test.TC001_Single_Product_Checkout1">
-        <methods>
-          <include name="Flush"/>
-          <include name="init"/>
-        </methods>
-      </class> <!-- com.AP.qa.test.TC001_Single_Product_Checkout1 -->
-      <class name="com.AP.qa.test.TC004_Single_Products_WithoutLogin_Checkout_4">
-        <methods>
-          <include name="Flush"/>
-          <include name="Setup"/>
-        </methods>
-      </class> <!-- com.AP.qa.test.TC004_Single_Products_WithoutLogin_Checkout_4 -->
-      <class name="com.AP.qa.test.TC002_Multiple_Products_Checkout_2">
-        <methods>
-          <include name="Flush"/>
-          <include name="init"/>
-        </methods>
-      </class> <!-- com.AP.qa.test.TC002_Multiple_Products_Checkout_2 -->
-      <class name="com.AP.qa.test.TC003_Reorder_Products_Checkout_3">
-        <methods>
-          <include name="init"/>
-          <include name="Flush"/>
-        </methods>
-      </class> <!-- com.AP.qa.test.TC003_Reorder_Products_Checkout_3 -->
-    </classes>
-  </test> <!-- Test5(failed) -->
 </suite> <!-- Failed suite [Suite] -->

@@ -24,7 +24,14 @@ public class TC001_Single_Product_Checkout1 extends TestBase {
 	public void init(String Browser) throws Throwable {
 		initialization(Browser);
 		SetUP(this.getClass().getSimpleName(), driver.getTitle());
-		login = new Login();
+		
+		//Validation for Given URL is opened or not
+		 if(HomePageValidation(driver.getTitle())!=null) {
+			 Reporting("Pass", "URL Navigation", "Successfully navigated to Automation Practice", "User Should be able to navigate Automation Practice");
+		 }else {
+			 Reporting("Fail", "URL Navigation", "Unsuccessfully navigated to Automation Practice", "User Should be able to navigate Automation Practice");
+			 closeBrowser();
+		 }
 	}
 	
 	
@@ -32,11 +39,21 @@ public class TC001_Single_Product_Checkout1 extends TestBase {
 	//Login test
 	@Test(priority = 1)
 	public void LoginTest() throws Throwable{
-		GlobalElement=	login.Login_Before_checkout(prop.getProperty("username"), prop.getProperty("password"));
+		//GlobalElement=	login.Login_Before_checkout(prop.getProperty("username"), prop.getProperty("password"));
+		
+		Login.signInbtn.click();
+		Login.user.sendKeys(prop.getProperty("username"));
+		Login.password.sendKeys(prop.getProperty("password"));
+		Login.signIn.click();
+		Login.home.click();
 		
 		
-		if(Genral_Function.LoginValidation(GlobalElement)) {
-			 new homepage();	
+		if(Login.Beforeloginvalidation()!=null) {
+			 Reporting("Pass", "Login Page Validation", "User successfull naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));	 
+		}
+		else {
+			 Reporting("Fail", "Login Page Validation", "User unsuccessfull naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));
+			 closeBrowser();
 		}
 		
 	}
@@ -58,7 +75,7 @@ public class TC001_Single_Product_Checkout1 extends TestBase {
 			
 			homepage.qty.sendKeys(prop.getProperty("Qty"));	//Can give number of quantity 
 			
-			TestUtil.SelectQuantity(homepage.size, "L");	//Select Size -S / M /L
+			TestUtil.SelectQuantity(homepage.size, "L");	//Select Size -S / M /L  prop.getProperty("size")
 			
 			homepage.cart.click();
 			
@@ -77,16 +94,18 @@ public class TC001_Single_Product_Checkout1 extends TestBase {
 	@Test(priority = 3, enabled = true)
 	public void PaymentTest() throws Throwable{
 		GlobalValue = Genral_Function.getMultiProductValue(homepage.Price, homepage.tax);
+		GlobalArgumrnt = Genral_Function.Argvalidation("CheckOut Price ", GlobalValue,homepage.TotalPrice.getText().replace("$", ""));
+		
 		try{
-		if(Genral_Function.Argvalidation("CheckOut Price ", GlobalValue,homepage.TotalPrice.getText().replace("$", ""))==true) {
-			new Payment();
-			Payment.proceed.click();
-			 
+		if(homepage.Price_Validation(GlobalArgumrnt)!=null) {
+			Reporting("Pass", "Payment Page Validation", "User successfully navigate to Payment Page", "User should be able to navigate to Payment Page");
+			Payment.proceed.click(); 
 		}
 		}
 		catch(Exception e)
 		{
-			
+			Reporting("Fail", "Payment Page Validation", "User unsuccessfully navigate to Payment Page", "User should be able to navigate to Payment Page");
+			closeBrowser();
 		}
 		Payment.processAddress.click();
 		Payment.checkbox.click();
@@ -96,7 +115,7 @@ public class TC001_Single_Product_Checkout1 extends TestBase {
 		Payment.confirm.click();
 		
 		if(Genral_Function.Argvalidation("Final Price Validation", GlobalValue,Payment.price.getText().replace("$", ""))==true) {
-		new Logout();
+		Payment.logoutvalidation();
 		}
 		
 	}
@@ -106,8 +125,7 @@ public class TC001_Single_Product_Checkout1 extends TestBase {
 	@Test(priority = 4, enabled = true)
 	public void LogoutTest() throws Throwable {
 		Logout.signOut.click();
-		GlobalValue = Logout.signIn.getText();
-		Genral_Function.logoutvalidation(GlobalValue);
+		Genral_Function.logoutvalidation(Logout.signIn.getText());
 	}
 	
 	@AfterClass
