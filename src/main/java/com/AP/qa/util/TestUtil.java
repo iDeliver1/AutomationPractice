@@ -1,12 +1,13 @@
 package com.AP.qa.util;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -25,17 +26,18 @@ public static String Report_Folder_path = "C:\\Reporting\\Report"+fTimestamp();
 
 
 
-public static String fGetCurrentDate()
-{
-	Date date = new Date();  
-    SimpleDateFormat dateformat = new SimpleDateFormat("MM/dd/yyyy");  
-    String strDate = dateformat.format(date); 
-    return strDate;
-}
+	//------------------Function for Current Date -------------------
+	public static String fGetCurrentDate()
+	{
+		Date date = new Date();  
+	    SimpleDateFormat dateformat = new SimpleDateFormat("MM/dd/yyyy");  
+	    String strDate = dateformat.format(date); 
+	    return strDate;
+	}
 
 	
 //-------------------------------------------TimeStamp Function----------------------------------	
-	public static String fTimestamp()
+		public static String fTimestamp()
 		{
 			Date now = new Date();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy-hh-mm-ss");
@@ -43,7 +45,7 @@ public static String fGetCurrentDate()
 			return time.replace("-", "");
 		}
 		 
-//-----------------------------------------------Screenshot Function-------------------------------	
+		//-----------------------------------------------Screenshot Function-------------------------------	
 	   public static String fScreenReport() throws Throwable
 		{
 	    	File source_image = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
@@ -54,6 +56,8 @@ public static String fGetCurrentDate()
 			return ""+Desti_image;
 		}
 	   
+	   
+	 //-----------------------------------------------Screenshot Function At end of the Function-------------------------------	 
 		public  void takeScreenshotAtEndOfTest() throws Throwable  {
 			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			String currentDir = System.getProperty("user.dir");
@@ -61,51 +65,30 @@ public static String fGetCurrentDate()
 		}
 		
 					
-		//-------------------Function for determining Chrome Browser Version---------------------
+		//-------------------Function for getting Chrome Browser Version---------------------
 		public static String getBrowserVersion() throws IOException {
 			try {
-				
-				Runtime rt = Runtime.getRuntime();
-			    try {
-			       rt.exec("cmd  /K \"dir /B/AD \"C:/Program Files (x86)/Google/Chrome/Application/\"|findstr /R /C:\"^[0-9].*\\..*[0-9]$\" > C:/version.txt\"");
-			       brow = getversion();
-			    } catch (IOException e) {
-			        e.printStackTrace();
-			    }
-			return brow.substring(0, brow.length() - 4);
+			 
+		   Runtime rt = Runtime.getRuntime();
+	       Process proc =  rt.exec("cmd  /K \"dir /B/AD \"C:/Program Files (x86)/Google/Chrome/Application/\"|findstr /R /C:\"^[0-9].*\\..*[0-9]$\"");
+	       InputStream stdIn = proc.getInputStream();
+	       InputStreamReader isr = new InputStreamReader(stdIn);
+	       BufferedReader br = new BufferedReader(isr);
+	       
+	       while ((brow = br.readLine()) != null) {
+	            System.out.println("Chrome Browser Version is - "+brow);
+	            break;
+	            }
+	    
+	       return brow.substring(0, brow.length() - 4);
 		}
 		catch(Exception e)
 		{
-		brow = e.toString();
-			return brow;
-		}
-		
-		}
-		
-		//--------------------Return Stored value of  Chrome Browser Version----------------------------
-		public static String getversion() {
-			 String data = "";
-			try {
-			File myObj = new File("C:/version.txt");
-		      Scanner myReader = new Scanner(myObj);
-		      while (myReader.hasNextLine()) {
-		         data = myReader.nextLine();
-		        System.out.println(data);
-		        break;
-		        
-		      }
-		      myReader.close();
-		      return data;
-		    } catch (FileNotFoundException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		    }
-		  
 			return null;
 		}
 		
-		
-		
+		}
+
 		//------------------Function for move able object------------------- 
 		public static void MoveElement(WebElement element) {
 			Actions action = new Actions(driver);

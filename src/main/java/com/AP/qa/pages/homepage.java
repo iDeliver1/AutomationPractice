@@ -1,22 +1,16 @@
 package com.AP.qa.pages;
 
 import java.util.List;
-
 import org.openqa.selenium.WebElement;
-
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import com.AP.qa.base.TestBase;
-import com.AP.qa.util.Excel_Libraries;
-import com.AP.qa.util.TestUtil;
+
 
 
 public class homepage extends TestBase{
-	
-	@FindBy(xpath = "//a[@class='button btn btn-default standard-checkout button-medium']//span[contains(text(),'Proceed to checkout')]")
-	public static WebElement proceed;
-	
+
+	//-----------------WebElement for Re-Order----------------------------
 	@FindBy(xpath = "//span[contains(text(),'Order history and details')]")public static
 	  WebElement orderDetails;	
 
@@ -28,6 +22,9 @@ public class homepage extends TestBase{
 	
 	@FindBy(xpath = "//span[contains(text(),'sunil jaiswal')]")public static
 	  WebElement profile;
+	
+	
+	//-------------------WebElement for Single Product---------------------------------
 	
 	@FindBy(xpath = "//li[@class='ajax_block_product col-xs-12 col-sm-4 col-md-3 first-in-line first-item-of-tablet-line first-item-of-mobile-line hovered']//a[@class='product-name'][contains(text(),'Faded Short Sleeve T-shirts')]")
 	public static
@@ -52,11 +49,13 @@ public class homepage extends TestBase{
 	public static
 	  WebElement checkout;
 	
-	@FindBy(xpath = "//div[@class='box-info-product']")public
-	  WebElement frame;
+	@FindBy(xpath = "//a[@class='button btn btn-default standard-checkout button-medium']//span[contains(text(),'Proceed to checkout')]")
+	public static WebElement proceed;
 	
 	
-	   int counter=0;
+	
+	//-----------------WebElement for Multiple Products----------------------------
+	
 	
 	@FindBy(xpath = "//ul[@id='homefeatured']//following-sibling::li")public static
 	  List<WebElement> MultiProducts;
@@ -70,6 +69,10 @@ public class homepage extends TestBase{
 	
 	@FindBy(xpath = "//span[contains(text(),'Proceed to checkout')]")public static
 	  WebElement ProccedCheckout;
+	
+	
+	
+	//-----------------WebElement for Price,Tax & Final Price(Price + Tax)-------------------
 	
 	@FindBy(xpath = "//span[contains(@id,'total_product_price')]")
 	public static  List<WebElement> Price;
@@ -92,7 +95,7 @@ public class homepage extends TestBase{
 	
 	
 	
-	
+	//------------Validation for Final Price is equal to Price+Tax or not and then navigate to Payment Section----------------
 	public static Payment Price_Validation(Boolean Validationpoint) {
 		try {
 		

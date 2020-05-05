@@ -1,10 +1,11 @@
 package com.AP.qa.test;
 
+
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import com.AP.qa.base.TestBase;
 import com.AP.qa.pages.Login;
 import com.AP.qa.pages.Logout;
@@ -124,13 +125,13 @@ public class TC005_Multiple_Products_WithoutLogin_Checkout_5 extends TestBase {
 				Payment.confirm.click();
 				
 				if(Genral_Function.Argvalidation("Final Price Validation", GlobalValue,Payment.price.getText().replace("$", ""))==true) {
-					 new Logout();
+					Payment.logoutvalidation();
 				}	
 		}
 	}
 	
 
-//Logout test
+	//Logout test
 	@Test(priority = 4, enabled = true)
 	public void LogoutTest() throws Throwable {
 		Logout.signOut.click();
@@ -140,7 +141,6 @@ public class TC005_Multiple_Products_WithoutLogin_Checkout_5 extends TestBase {
 	@AfterClass
 	public void Flush() throws Throwable
 	{
-		
 		closeBrowser();
 	}
 	

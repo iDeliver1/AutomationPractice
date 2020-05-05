@@ -30,15 +30,12 @@ public class Excel_Libraries extends TestBase {
 	static String Reportn;
 	static int Sheetindex=0;
 	
+	
+	//---------------Creating file and Sheet name-------------------------
 	 public static String createExcel(String Reportname) throws InvalidFormatException, IOException{
 			WB = new XSSFWorkbook();
 		if ((new File(Excel_path)).exists()==false) {	
-			
 			Reportn = Reportname;
-			String filename = System.getProperty("user.dir")+"/src/test/java/com/AP/qa/test" ;
-		
-			
-		    
 		    WB.createSheet(Reportname).createRow(0).createCell(0);
 			
 			FileOutputStream fout;
@@ -75,9 +72,7 @@ public class Excel_Libraries extends TestBase {
 			
 			Reportn = Reportname;
 		}
-		
-		
-		
+
 		Sheetindex= Sheetindex+1;
 		return Reportn;
 		
@@ -166,7 +161,7 @@ public class Excel_Libraries extends TestBase {
 			  for (int j=0; j<col; j++)
 			  {
 				  cl = sh.getRow(i).getCell(j);
-				  //System.out.println(cl.getStringCellValue());
+				  
 				  Data[i][j] = cl.getStringCellValue();
 			  }
 		  }
@@ -182,11 +177,11 @@ public class Excel_Libraries extends TestBase {
 	   public static String getdata(int index) {
 		   try {
 		   FileInputStream fin = new FileInputStream(System.getProperty("user.dir")+ "/src/main/java/com/AP/"+ "qa/data/testdata.xlsx");
-		   //FileInputStream fin = new FileInputStream(System.getProperty("User.dir")+"\\src\\main\\java\\com\\AP\\qa\\data\\testdata.xlsx");
+		 
 		   Workbook wb;
 		   wb = WorkbookFactory.create(fin);
 		   Sheet sh = wb.getSheet("sheet1");
-		   //Sheet sh = wb.getSheet(sheet);
+		   
 		   Row rw = sh.getRow(0);
 		   Cell cl = rw.getCell(0);
 
@@ -202,49 +197,27 @@ public class Excel_Libraries extends TestBase {
 		   return null;
 		    }
 	   
-	   //Checking Sheet has value or not
-	   public static boolean  cellempty(XSSFWorkbook WB,String Rep) throws InvalidFormatException, IOException {
-		   FileInputStream fin = new FileInputStream(Excel_path);
-		   WB = (XSSFWorkbook) WorkbookFactory.create(fin);
-			  Sheet sh = WB.getSheet(Rep);
-			  Row rw = sh.getRow(0);
-			  Cell cell = rw.getCell(0);
-			  
-			  if (cell != null) { // use row.getCell(x, Row.CREATE_NULL_AS_BLANK) to avoid null cells
-			        return true;
-			    }
-
-			    if (cell.getCellType() != Cell.CELL_TYPE_BLANK) {
-			        return true;
-			    }
-
-			    if (cell.getCellType()!= Cell.CELL_TYPE_STRING && cell.getStringCellValue().trim().isEmpty()) {
-			        return true;
-			    }
-		   
-		return false;
-		   
-	   }
-	   
+	  
+	   //-----------------Getting Value from Excel with particular coloumn name---------------
 	   public static String fRead(String Attri_name,String Sheet_name) throws Throwable
 	    {
-	FileInputStream fin=new FileInputStream(System.getProperty("user.dir")+ "/src/main/java/com/AP/"+ "qa/data/testdata.xlsx");
-	WB=(XSSFWorkbook) WorkbookFactory.create(fin);
-	Sheet sh = WB.getSheet(Sheet_name);
-	int Row_cnt = sh.getLastRowNum();
-	  for(int i=0;i<=Row_cnt;i++)  
-	  {
-	  Row rw_obj = sh.getRow(i);
-	  Cell cell_obj = rw_obj.getCell(0);
-	  String Attri = cell_obj.toString();
-	     if(Attri.equals(Attri_name))
-	     {
-	  Cell Attri_valu= rw_obj.getCell(1);
-	  return Attri_valu.toString();
-	     }
-	  }
-	return null;  
-	}
+			FileInputStream fin=new FileInputStream(System.getProperty("user.dir")+ "/src/main/java/com/AP/"+ "qa/data/testdata.xlsx");
+			WB=(XSSFWorkbook) WorkbookFactory.create(fin);
+			Sheet sh = WB.getSheet(Sheet_name);
+			int Row_cnt = sh.getLastRowNum();
+			  for(int i=0;i<=Row_cnt;i++)  
+			  {
+			  Row rw_obj = sh.getRow(i);
+			  Cell cell_obj = rw_obj.getCell(0);
+			  String Attri = cell_obj.toString();
+			     if(Attri.equals(Attri_name))
+			     {
+			  Cell Attri_valu= rw_obj.getCell(1);
+			  return Attri_valu.toString();
+			     }
+			  }
+			return null;  
+			}
 
 	   
 }

@@ -6,9 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
 import com.AP.qa.base.TestBase;
-import com.AP.qa.util.TestUtil;
+
 
 
 public class Login extends TestBase{

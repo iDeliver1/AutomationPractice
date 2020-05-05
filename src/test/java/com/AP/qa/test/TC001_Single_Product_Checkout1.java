@@ -13,16 +13,14 @@ import com.AP.qa.pages.homepage;
 import com.AP.qa.util.Genral_Function;
 import com.AP.qa.util.TestUtil;
 
-
-
 public class TC001_Single_Product_Checkout1 extends TestBase {
 	
-	Login login;
-	
+
 	@Parameters("Browser")
 	@BeforeClass
 	public void init(String Browser) throws Throwable {
 		initialization(Browser);
+		
 		SetUP(this.getClass().getSimpleName(), driver.getTitle());
 		
 		//Validation for Given URL is opened or not
@@ -39,8 +37,7 @@ public class TC001_Single_Product_Checkout1 extends TestBase {
 	//Login test
 	@Test(priority = 1)
 	public void LoginTest() throws Throwable{
-		//GlobalElement=	login.Login_Before_checkout(prop.getProperty("username"), prop.getProperty("password"));
-		
+	
 		Login.signInbtn.click();
 		Login.user.sendKeys(prop.getProperty("username"));
 		Login.password.sendKeys(prop.getProperty("password"));

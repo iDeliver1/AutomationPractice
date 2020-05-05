@@ -64,7 +64,7 @@ public class Genral_Function extends TestBase {
 			 
 		   }   
 		   	
-}
+	}
 	
 	
 
@@ -73,15 +73,11 @@ public class Genral_Function extends TestBase {
 		try{
 			Assert.assertEquals(Actual, Expected);
 			Reporting("PASS","Verifying "+StepName,StepName+" is equal to "+Actual,StepName+"should be equal to "+Expected);
-			
 			log(StepName+" Validation     "+Actual + " is equal to " +Expected);
-			
-			
 			return true;
 			
 			}catch(Exception e){ 
-			log(StepName+"  Validation    "+ Actual + " is not  equal to " +Expected+" because "+e);
-				
+				log(StepName+"  Validation    "+ Actual + " is not  equal to " +Expected+" because "+e);
 				Reporting("FAIL","Verifying "+StepName,StepName+"is equal to "+Actual+""+e,StepName+"should be equal to "+Expected);
 				closeBrowser();
 				return false;

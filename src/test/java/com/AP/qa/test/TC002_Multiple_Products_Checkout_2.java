@@ -132,7 +132,7 @@ public class TC002_Multiple_Products_Checkout_2 extends TestBase{
 		Payment.confirm.click();
 		
 		if(Genral_Function.Argvalidation("Final Price Validation", GlobalValue,Payment.price.getText().replace("$", ""))==true) {
-			 new Logout();
+			Payment.logoutvalidation();
 		}
 		
 	}
