@@ -13,22 +13,22 @@ import com.AP.qa.base.TestBase;
 public class Login extends TestBase{
 	
 	@FindBy(xpath = "//a[@class='login']")
-	public static WebElement signInbtn;
+	  WebElement signInbtn;
 	
 	@FindBy(xpath = "//input[@id='email']")
-	public static WebElement user;
+	  WebElement user;
 	
 	@FindBy(xpath = "//input[@id='passwd']")
-	public static WebElement password;
+	 WebElement password;
 	
 	@FindBy(xpath = "//button[@id='SubmitLogin']")
-	public static WebElement signIn;
+	  WebElement Loginbtn;
 	
 	@FindBy(xpath = "//img[@class='logo img-responsive']")
-	public static WebElement home;
+	  WebElement home;
 	
 	@FindBy(xpath = "//span[contains(text(),'sunil jaiswal')]")
-	public static WebElement validate_user;
+	static	  WebElement validate_user;
 	
 	
 	public Login() {
@@ -39,31 +39,41 @@ public class Login extends TestBase{
 		return validate_user.isDisplayed();
 	}
 	
-
 	
-	public static homepage Beforeloginvalidation() {
+	
+		public Homepage UserLogin(String username,String pass) throws Throwable {
+			signInbtn.click();
+			user.sendKeys(username);
+			password.sendKeys(pass);
+			Loginbtn.click();
+			
+			if(Logoinvalidation()==true) {
+				home.click();
+				Reporting("Pass", "Login Page Validation", "User successfull naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));
+				return new Homepage();
+			}
+			else {
+				Reporting("Fail", "Login Page Validation", "User unsuccessfull naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));
+				 closeBrowser();
+				return null;
+			}
+	}
+	
+		
+	public boolean  Logoinvalidation() {
 		try {
 			Assert.assertEquals(true,validateAPLogo());
-			return new homepage();
+			return true;
 		}catch(Exception e) {
-			
+			return false;
 		}
 		
-		return null;
+		
 	}
 	
 
 	
-	public static Payment Afterloginvalidation() {
-		try {
-			Assert.assertEquals(true, validateAPLogo());
-			return new Payment();
-		}catch(Exception e) {
-			
-		}
-		
-		return null;
-	}
+
 	
 		
 	}

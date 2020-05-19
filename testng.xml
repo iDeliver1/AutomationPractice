@@ -3,9 +3,8 @@
 <suite name="Suite">
   <test name="Test">
   <parameter name = "Browser" value="chrome"/>
-   <parameter name = "Product" value="Single"/>
     <classes>
-      <class name="com.AP.qa.test.TC001_Single_Product_Checkout1"/>
+      <class name="com.AP.qa.TEST1.Test1"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

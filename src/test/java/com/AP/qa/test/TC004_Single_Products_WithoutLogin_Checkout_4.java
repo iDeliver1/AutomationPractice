@@ -8,14 +8,14 @@ import com.AP.qa.base.TestBase;
 import com.AP.qa.pages.Login;
 import com.AP.qa.pages.Logout;
 import com.AP.qa.pages.Payment;
-import com.AP.qa.pages.homepage;
+import com.AP.qa.pages.Homepage;
 import com.AP.qa.util.Genral_Function;
 import com.AP.qa.util.TestUtil;
 
 public class TC004_Single_Products_WithoutLogin_Checkout_4 extends TestBase{
 
 	
-	
+	/*
 	
 	@Parameters("Browser")
 	@BeforeClass
@@ -119,5 +119,5 @@ public class TC004_Single_Products_WithoutLogin_Checkout_4 extends TestBase{
 	{
 		closeBrowser();
 	}
-	
+	*/
 }

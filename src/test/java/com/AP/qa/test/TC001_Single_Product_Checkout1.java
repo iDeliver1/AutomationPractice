@@ -9,13 +9,13 @@ import com.AP.qa.base.TestBase;
 import com.AP.qa.pages.Login;
 import com.AP.qa.pages.Logout;
 import com.AP.qa.pages.Payment;
-import com.AP.qa.pages.homepage;
+import com.AP.qa.pages.Homepage;
 import com.AP.qa.util.Genral_Function;
 import com.AP.qa.util.TestUtil;
 
 public class TC001_Single_Product_Checkout1 extends TestBase {
 	
-
+/*
 	@Parameters("Browser")
 	@BeforeClass
 	public void init(String Browser) throws Throwable {
@@ -131,5 +131,5 @@ public class TC001_Single_Product_Checkout1 extends TestBase {
 		closeBrowser();
 	}
 	
-	
+*/	
 }

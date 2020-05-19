@@ -10,14 +10,14 @@ import com.AP.qa.base.TestBase;
 import com.AP.qa.pages.Login;
 import com.AP.qa.pages.Logout;
 import com.AP.qa.pages.Payment;
-import com.AP.qa.pages.homepage;
+import com.AP.qa.pages.Homepage;
 import com.AP.qa.util.Excel_Libraries;
 import com.AP.qa.util.Genral_Function;
 import com.AP.qa.util.TestUtil;
 
 public class TC005_Multiple_Products_WithoutLogin_Checkout_5 extends TestBase {
 
-	
+	/*
 	@Parameters("Browser")
 	@BeforeClass
 	public void Setup(String Browser) throws Throwable {
@@ -145,5 +145,5 @@ public class TC005_Multiple_Products_WithoutLogin_Checkout_5 extends TestBase {
 	}
 	
 	
-	
+	*/
 }
