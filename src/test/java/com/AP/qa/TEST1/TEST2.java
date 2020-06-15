@@ -5,37 +5,34 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.AP.qa.base.TestBase;
-import com.AP.qa.pages.Login_Page;
-import com.AP.qa.pages.Logout_Page;
-import com.AP.qa.pages.Payment_Page;
 import com.AP.qa.pages.Homepage_Page;
+import com.AP.qa.pages.Logout;
+import com.AP.qa.pages.Payment;
 
-
-public class Test1 extends TestBase {
-	Login_Page ClsObjLogin;
-	Homepage_Page ClsObjHome;
-	Payment_Page ClsObjPayment;
-	Logout_Page ClsObjLogout;
+public class TEST2 extends TestBase{
+	
+	Homepage_Page Home;
+	Payment pay;
+	Logout log;
 	
 	@Parameters("Browser")
 	@BeforeTest
 	public void init(String Browser) throws Throwable {
 		initialization(Browser);
 		
-		
 	}
-	
-	
+
 	@BeforeClass
 	public void Setup() throws Throwable {
 		SetUP(this.getClass().getSimpleName(), driver.getTitle());
 		
 		//------Validation for Home Page is open or not -------------
 		
-		ClsObjLogin =	HomePageValidation(driver.getTitle());
+		Home =	HomePageVvalidation(driver.getTitle());
 		
-		 if(ClsObjLogin!=null) {
+		 if(Home!=null) {
 			 Reporting("Pass", "URL Navigation", "Successfully navigated to Automation Practice", "User Should be able to navigate Automation Practice");
 		 }else {
 			 Reporting("Fail", "URL Navigation", "Unsuccessfully navigated to Automation Practice", "User Should be able to navigate Automation Practice");
@@ -43,49 +40,39 @@ public class Test1 extends TestBase {
 		 }	
 	}
 	
-	
-	 //--------------Login function------------------
 	@Test(priority = 1,enabled = true)
-	public void Login_Test() throws Throwable {
-		 ClsObjHome = ClsObjLogin.UserLogin(prop.getProperty("username"),prop.getProperty("password"));
-	}
-	
-
-	@Test(priority = 2,enabled = true)
 	public void Product_Selection_Test() throws Throwable {
 			
-		ClsObjHome.SelectSingle_Product("L");
+		Home.SelectSingle_Product("L");
 		
-		ClsObjPayment=ClsObjHome.PriceValidation();
+		pay=Home.PriceValidation();
 			
 	}
 	
-	@Test(priority = 3,enabled = true)
-	public void Payment_Process_Test() throws Throwable {
-		
-		if(ClsObjPayment!=null) {
+	@Test(priority = 2,enabled = true)
+	public void Login_And_Payment_Test() throws Throwable {
+		if(pay!=null) {
 			Reporting("Pass", "Payment Page Validation", "User successfully navigate to Payment Page", "User should be able to navigate to Payment Page");
-			ClsObjPayment.proceed.click(); 
+			pay.proceed.click(); 
 		}
 		else {
 			Reporting("Fail", "Payment Page Validation", "User unsuccessfully navigate to Payment Page", "User should be able to navigate to Payment Page");
 			closeBrowser();
 		}
 		
-		ClsObjPayment.PaymentProcess();
-		ClsObjLogout = ClsObjPayment.FinalPrice_Validation();
-		
+		GlobalValue =	pay.PaymentProcess();
+		log = pay.FinalPrice_Validation();
 	}
 	
-	@Test(priority = 4,enabled = true)
+	
+	@Test(priority = 3,enabled = true)
 	public void Logout_Test() throws Throwable {
-		ClsObjLogout.Logout_perform();
+			log.Logout_perform();
 	}
-	
 	
 	@AfterClass
 	public void tearUp() {
 		closeBrowser();
 	}
-
+	
 }

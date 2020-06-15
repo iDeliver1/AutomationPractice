@@ -6,14 +6,14 @@ import org.openqa.selenium.support.PageFactory;
 import com.AP.qa.base.TestBase;
 import com.AP.qa.util.Genral_Function;
 
-public class Logout extends TestBase{
+public class Logout_Page extends TestBase{
 	@FindBy(xpath = "//a[@class='logout']")
 	 WebElement signOut;
 	
 	@FindBy(xpath = "//div[@class='header_user_info']" )
 	 WebElement signIn;
 	
-	public Logout() {
+	public Logout_Page() {
 		PageFactory.initElements(driver, this);
 	}
 	

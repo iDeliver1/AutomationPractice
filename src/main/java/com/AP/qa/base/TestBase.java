@@ -22,8 +22,8 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
-import com.AP.qa.pages.Login;
-import com.AP.qa.pages.Homepage;
+import com.AP.qa.pages.Login_Page;
+import com.AP.qa.pages.Homepage_Page;
 import com.AP.qa.util.Excel_Libraries;
 import com.AP.qa.util.Extent_Report;
 import com.AP.qa.util.TestUtil;
@@ -188,10 +188,10 @@ public class TestBase {
 		
 		
 		//------------Function for Validating Home page is open or not and then return Login Page Constructor
-		public static Login HomePageValidation(String Actual) {
+		public static Login_Page HomePageValidation(String Actual) {
 					try {
 						Assert.assertEquals(Actual, "My Store");
-						return new Login();
+						return new Login_Page();
 					}catch(Exception e) {
 						
 						return null;
@@ -199,10 +199,10 @@ public class TestBase {
 		}
 				
 				//------------Function for Validating Home page is open or not and then return Home Page Constructor 
-		public static Homepage HomePageVvalidation(String Actual) {
+		public static Homepage_Page HomePageVvalidation(String Actual) {
 					try {
 						Assert.assertEquals(Actual, "My Store");
-						return new Homepage();
+						return new Homepage_Page();
 					}catch(Exception e) {
 						
 						return null;

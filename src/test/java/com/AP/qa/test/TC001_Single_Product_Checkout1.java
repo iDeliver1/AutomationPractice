@@ -6,10 +6,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.AP.qa.base.TestBase;
-import com.AP.qa.pages.Login;
+import com.AP.qa.pages.Login_Page;
 import com.AP.qa.pages.Logout;
 import com.AP.qa.pages.Payment;
-import com.AP.qa.pages.Homepage;
+import com.AP.qa.pages.Homepage_Page;
 import com.AP.qa.util.Genral_Function;
 import com.AP.qa.util.TestUtil;
 

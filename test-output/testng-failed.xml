@@ -5,7 +5,7 @@
   <test name="Test">
     <parameter name="Browser" value="chrome"/>
     <classes>
-      <class name="com.AP.qa.TEST1.Test1"/>
+      <class name="com.AP.qa.TEST1.TEST3"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Failed suite [Suite] -->

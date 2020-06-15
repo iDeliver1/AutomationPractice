@@ -10,7 +10,7 @@ import com.AP.qa.base.TestBase;
 
 
 
-public class Login extends TestBase{
+public class Login_Page extends TestBase{
 	
 	@FindBy(xpath = "//a[@class='login']")
 	  WebElement signInbtn;
@@ -31,7 +31,7 @@ public class Login extends TestBase{
 	static	  WebElement validate_user;
 	
 	
-	public Login() {
+	public Login_Page() {
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -41,7 +41,7 @@ public class Login extends TestBase{
 	
 	
 	
-		public Homepage UserLogin(String username,String pass) throws Throwable {
+		public Homepage_Page UserLogin(String username,String pass) throws Throwable {
 			signInbtn.click();
 			user.sendKeys(username);
 			password.sendKeys(pass);
@@ -50,7 +50,7 @@ public class Login extends TestBase{
 			if(Logoinvalidation()==true) {
 				home.click();
 				Reporting("Pass", "Login Page Validation", "User successfull naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));
-				return new Homepage();
+				return new Homepage_Page();
 			}
 			else {
 				Reporting("Fail", "Login Page Validation", "User unsuccessfull naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));
@@ -58,6 +58,7 @@ public class Login extends TestBase{
 				return null;
 			}
 	}
+	
 	
 		
 	public boolean  Logoinvalidation() {
@@ -67,14 +68,20 @@ public class Login extends TestBase{
 		}catch(Exception e) {
 			return false;
 		}
-		
-		
 	}
 	
-
-	
-
-	
+	public void PaymentPageLogin(String username,String pass) throws Throwable {
+		user.sendKeys(username);
+		password.sendKeys(pass);
+		Loginbtn.click();
+		if(Logoinvalidation()==true) {
+			Reporting("Pass", "Login Page Validation", "User successfull naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));
+		}
+		else {
+			Reporting("Fail", "Login Page Validation", "User unsuccessfull naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"), "User should be able to  naviagted to homepage with username - "+prop.getProperty("username")+" & password - "+prop.getProperty("password"));
+			 closeBrowser();
+		}
+	}
 		
 	}
 

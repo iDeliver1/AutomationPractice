@@ -8,7 +8,7 @@ import com.AP.qa.base.TestBase;
 import com.AP.qa.util.Genral_Function;
 
 
-public class Payment extends TestBase{
+public class Payment_Page extends TestBase{
 	
 	@FindBy(xpath = "//a[@class='button btn btn-default standard-checkout button-medium']//span[contains(text(),'Proceed to checkout')]")
 	public
@@ -53,28 +53,35 @@ public class Payment extends TestBase{
 	@FindBy(xpath = "//span[@id='total_price']")
 	 WebElement TotalPrice;
 	
+	
+	
 
 	
-	public Payment() {
+	public Payment_Page() {
 		PageFactory.initElements(driver, this);
 	}
 
-	public String PaymentProcess() {
+	public void PaymentProcess() throws Throwable {
+		
+		
+		if(driver.getTitle().contains("Login - My Store"))
+		{
+			Login_Page Ologin = new Login_Page();
+			Ologin.PaymentPageLogin(prop.getProperty("username"),prop.getProperty("password"));
+		}
 		processAddress.click();
 		checkbox.click();
 		processCarrier.click(	);
 		GlobalValue = amount.getText().replace("$", "");
 		pay_method.click();
 		confirm.click();
-		
-		return GlobalValue;
 	}
 	
 	
 	
-	public  Logout FinalPrice_Validation() throws Throwable {
+	public  Logout_Page FinalPrice_Validation() throws Throwable {
 		if(Genral_Function.Argvalidation("Final Price Validation", GlobalValue,price.getText().replace("$", ""))==true) {
-			return new Logout();
+			return new Logout_Page();
 			}
 		else return null;
 	}

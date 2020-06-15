@@ -11,7 +11,7 @@ import com.AP.qa.util.TestUtil;
 
 
 
-public class Homepage extends TestBase{
+public class Homepage_Page extends TestBase{
 
 	//-----------------WebElement for Re-Order----------------------------
 	@FindBy(xpath = "//span[contains(text(),'Order history and details')]")
@@ -94,18 +94,18 @@ public class Homepage extends TestBase{
 	
 	
 	
-	public Homepage() {
+	public Homepage_Page() {
 		PageFactory.initElements(driver, this);
 	}
 	
 	
 	
 	//------------Validation for Final Price is equal to Price+Tax or not and then navigate to Payment Section----------------
-	public static Payment Price_Validation(Boolean Validationpoint) {
+	public static Payment_Page Price_Validation(Boolean Validationpoint) {
 		try {
 		
 		if(Validationpoint==true) {
-			return new Payment();
+			return new Payment_Page();
 		}
 		}catch(Exception e) {
 			
@@ -136,11 +136,11 @@ public class Homepage extends TestBase{
 	}
 	
 	
-	public Payment PriceValidation() throws Throwable {
+	public Payment_Page PriceValidation() throws Throwable {
 		
 		GlobalValue = Genral_Function.getMultiProductValue(Price, tax);
 		if(Genral_Function.Argvalidation("CheckOut Price ", GlobalValue,TotalPrice.getText().replace("$", "")))
-			return new Payment();
+			return new Payment_Page();
 		else
 			return null;
 	
