@@ -1,0 +1,8 @@
+name: Suite
+
+tests:
+  - name: Test
+  
+parameters: { Browser: chrome}
+    classes:
+      - com.AP.qa.TEST1.TEST3
